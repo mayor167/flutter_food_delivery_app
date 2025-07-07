@@ -3,6 +3,7 @@ import 'package:app1/utilis/dimensions.dart';
 import 'package:app1/widgets/app_column.dart';
 import 'package:app1/widgets/app_icon.dart';
 import 'package:app1/widgets/big_text.dart';
+import 'package:app1/widgets/expandable_text_widget.dart';
 import 'package:app1/widgets/icon_and_text_widget.dart';
 import 'package:app1/widgets/small_text.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class PopularFoodDetail extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
+          //background image
           Positioned(
             left: 0,
             right: 0,
@@ -29,6 +31,7 @@ class PopularFoodDetail extends StatelessWidget {
               ),
           )
           ),
+         //icon widgets
           Positioned(
             top:Dimensions.getHeight(45),
              left: Dimensions.getWidth(20),
@@ -42,6 +45,7 @@ class PopularFoodDetail extends StatelessWidget {
 
           ),
           ),
+          //Introduction of food
           Positioned(
             left: 0,
             right: 0,
@@ -61,6 +65,8 @@ class PopularFoodDetail extends StatelessWidget {
                   AppColumn(text: "Chinese Side"),
                   SizedBox(height:Dimensions.getHeight(20),),
                   BigText(text: "Introduce"),
+                    SizedBox(height:Dimensions.getHeight(20),),
+                  Expanded(child: SingleChildScrollView(child: ExpandableTextWidget(text: "Chicken marinated in a blend of spices, herbs, and acidic ingredients is soaked to absorb deep flavor and become more tender. The marinade typically includes elements like lemon juice or vinegar (for tenderizing), oil or yogurt (to keep the meat juicy), and seasonings such as garlic, pepper, or herbs. This process allows the chicken to develop a rich, well-balanced taste before it’s cooked—whether grilled, baked, or fried—resulting in a more flavorful and succulent dish.")))
                 ],
               ),
             )
