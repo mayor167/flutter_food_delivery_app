@@ -75,6 +75,35 @@ class PopularFoodDetail extends StatelessWidget {
               borderRadius: BorderRadius.only(topLeft: Radius.circular(Dimensions.getHeight(40)), topRight: Radius.circular(Dimensions.getHeight(40)),),
               color: AppColors.buttonBackgroundColor,
             ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(top:Dimensions.getHeight(15), bottom: Dimensions.getHeight(15),left: Dimensions.getWidth(20),right: Dimensions.getWidth(20) ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(Dimensions.getHeight(20)),
+                        color: Colors.white,
+                      ),
+                     child: Row(
+                      children: [
+                        Icon(Icons.remove,color: AppColors.signColor,),
+                        SizedBox(width: Dimensions.getWidth(5),),
+                        BigText(text: "0"),
+                        SizedBox(width: Dimensions.getWidth(5),),
+                        Icon(Icons.add, color: AppColors.signColor,),
+                      ],
+                     ),
+                    ),
+                    Container(
+                       padding: EdgeInsets.only(top:Dimensions.getHeight(15), bottom: Dimensions.getHeight(15),left: Dimensions.getWidth(20),right: Dimensions.getWidth(20) ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(Dimensions.getHeight(20)),
+                        color: AppColors.mainColor
+                      ),
+                      child: BigText(text: "\$10 | Add to cart", color: Colors.white,),
+                    ) 
+                  ],
+            ),
       ),
     );
   }
