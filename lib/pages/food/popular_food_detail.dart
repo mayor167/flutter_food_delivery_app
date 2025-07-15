@@ -20,6 +20,7 @@ class PopularFoodDetail extends StatelessWidget {
     var product = Get.find<PopularProductController>().popularProductLsit[pageId];
   // print("page is id" + pageId.toString());
   // print("Product name is" + product.name.toString());
+    Get.find<PopularProductController>().initProduct();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -96,7 +97,8 @@ class PopularFoodDetail extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: Container(
+      bottomNavigationBar: GetBuilder<PopularProductController>(builder: (popularProduct){
+        return Container(
         height: Dimensions.getHeight(120),
         padding: EdgeInsets.only(
           top: Dimensions.getHeight(30),
@@ -127,30 +129,41 @@ class PopularFoodDetail extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.remove, color: AppColors.signColor),
+                  GestureDetector(
+                     onTap: (){
+                          popularProduct.setQuantity(false);
+                    },
+                    child: Icon(Icons.remove, color: AppColors.signColor)),
                   SizedBox(width: Dimensions.getWidth(5)),
-                  BigText(text: "0"),
+                  BigText(text: popularProduct.quantity.toString()),
                   SizedBox(width: Dimensions.getWidth(5)),
-                  Icon(Icons.add, color: AppColors.signColor),
+                  GestureDetector(
+                    onTap: (){
+                          popularProduct.setQuantity(true);
+                    },
+                    child: Icon(Icons.add, color: AppColors.signColor,)),
                 ],
               ),
             ),
-            Container(
-              padding: EdgeInsets.only(
-                top: Dimensions.getHeight(15),
-                bottom: Dimensions.getHeight(15),
-                left: Dimensions.getWidth(20),
-                right: Dimensions.getWidth(20),
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.only(
+                  top: Dimensions.getHeight(15),
+                  bottom: Dimensions.getHeight(15),
+                  left: Dimensions.getWidth(15),
+                  right: Dimensions.getWidth(15),
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.getHeight(20)),
+                  color: AppColors.mainColor,
+                ),
+                child: BigText(text: "\$ ${product.price!} | Add to cart", color: Colors.white,),
               ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.getHeight(20)),
-                color: AppColors.mainColor,
-              ),
-              child: BigText(text: "\$ ${product.price!} | Add to cart", color: Colors.white),
             ),
           ],
         ),
-      ),
+      );
+      }),
     );
   }
 }

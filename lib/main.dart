@@ -12,12 +12,12 @@ import 'helper/dependencies.dart' as dep;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dep.init();
-  Get.config(
-    enableLog: true,
-    logWriterCallback: (text, {bool isError = false}) {
-      debugPrint('GETX: $text');
-    },
-  );
+  // Get.config(
+  //   enableLog: true,
+  //   logWriterCallback: (text, {bool isError = false}) {
+  //     debugPrint('GETX: $text');
+  //   },
+  // );
   runApp(const MyApp());
 }
 
