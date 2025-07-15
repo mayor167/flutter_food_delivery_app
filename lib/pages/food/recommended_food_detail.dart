@@ -1,4 +1,6 @@
+import 'package:app1/controllers/recommended_product_controller.dart';
 import 'package:app1/routes/route_helper.dart';
+import 'package:app1/utilis/app_constants.dart';
 import 'package:app1/utilis/colors.dart';
 import 'package:app1/utilis/dimensions.dart';
 import 'package:app1/widgets/app_icon.dart';
@@ -8,10 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
-  const RecommendedFoodDetail({super.key});
+  final int pageId;
+  const RecommendedFoodDetail({super.key, required this.pageId});
 
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<RecommendedProductController>().recommendedProductLsit[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
@@ -34,7 +38,7 @@ class RecommendedFoodDetail extends StatelessWidget {
               ),
               bottom: PreferredSize(preferredSize: Size.fromHeight(20),
                child: Container(
-                child: Center(child: BigText(size:Dimensions.getHeight(26) , text: "Chinese Side")),
+                child: Center(child: BigText(size:Dimensions.getHeight(26) , text: product.name!)),
                 width: double.maxFinite,
                 padding: EdgeInsets.only(top: Dimensions.getHeight(5), bottom: Dimensions.getHeight(10)),
                 decoration: BoxDecoration(
@@ -47,7 +51,7 @@ class RecommendedFoodDetail extends StatelessWidget {
               backgroundColor: AppColors.yellowColor,
               expandedHeight: Dimensions.getHeight(300),
               flexibleSpace: FlexibleSpaceBar(
-                background: Image.asset("assets/image/food0.png",
+                background: Image.network(AppConstants.BASE_URL + AppConstants.UPLOAD_URL + product.img!,
                 width: double.maxFinite,
                 fit: BoxFit.cover,
                 ),
@@ -59,7 +63,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(left: Dimensions.getWidth(20),right: Dimensions.getWidth(20)
                   ),
-                    child: ExpandableTextWidget(text: "Chicken marinated in a blend of spices, herbs, and acidic ingredients is soaked to absorb deep flavor and become more tender. The marinade typically includes elements like lemon juice or vinegar (for tenderizing), oil or yogurt (to keep the meat juicy), and seasonings such as garlic, pepper, or herbs. This process allows the chicken to develop a rich, well-balanced taste before it’s cooked—whether grilled, baked, or fried—resulting in a more flavorful and succulent dish. Chicken marinated in a blend of spices, herbs, and acidic ingredients is soaked to absorb deep flavor and become more tender. The marinade typically includes elements like lemon juice or vinegar (for tenderizing), oil or yogurt (to keep the meat juicy), and seasonings such as garlic, pepper, or herbs. This process allows the chicken to develop a rich, well-balanced taste before it’s cooked—whether grilled, baked, or fried—resulting in a more flavorful and succulent dish Chicken marinated in a blend of spices, herbs, and acidic ingredients is soaked to absorb deep flavor and become more tender. The marinade typically includes elements like lemon juice or vinegar (for tenderizing), oil or yogurt (to keep the meat juicy), and seasonings such as garlic, pepper, or herbs. This process allows the chicken to develop a rich, well-balanced taste before it’s cooked—whether grilled, baked, or fried—resulting in a more flavorful and succulent dish Chicken marinated in a blend of spices, herbs, and acidic ingredients is soaked to absorb deep flavor and become more tender. The marinade typically includes elements like lemon juice or vinegar (for tenderizing), oil or yogurt (to keep the meat juicy), and seasonings such as garlic, pepper, or herbs. This process allows the chicken to develop a rich, well-balanced taste before it’s cooked—whether grilled, baked, or fried—resulting in a more flavorful and succulent dish. Chicken marinated in a blend of spices, herbs, and acidic ingredients is soaked to absorb deep flavor and become more tender. The marinade typically includes elements like lemon juice or vinegar (for tenderizing), oil or yogurt (to keep the meat juicy), and seasonings such as garlic, pepper, or herbs. This process allows the chicken to develop a rich, well-balanced taste before it’s cooked—whether grilled, baked, or fried—resulting in a more flavorful and succulent dish Chicken marinated in a blend of spices, herbs, and acidic ingredients is soaked to absorb deep flavor and become more tender. The marinade typically includes elements like lemon juice or vinegar (for tenderizing), oil or yogurt (to keep the meat juicy), and seasonings such as garlic, pepper, or herbs. This process allows the chicken to develop a rich, well-balanced taste before it’s cooked—whether grilled, baked, or fried—resulting in a more flavorful and succulent dish Chicken marinated in a blend of spices, herbs, and acidic ingredients is soaked to absorb deep flavor and become more tender. The marinade typically includes elements like lemon juice or vinegar (for tenderizing), oil or yogurt (to keep the meat juicy), and seasonings such as garlic, pepper, or herbs. This process allows the chicken to develop a rich, well-balanced taste before it’s cooked—whether grilled, baked, or fried—resulting in a more flavorful and succulent dish. Chicken marinated in a blend of spices, herbs, and acidic ingredients is soaked to absorb deep flavor and become more tender. The marinade typically includes elements like lemon juice or vinegar (for tenderizing), oil or yogurt (to keep the meat juicy), and seasonings such as garlic, pepper, or herbs. This process allows the chicken to develop a rich, well-balanced taste before it’s cooked—whether grilled, baked, or fried—resulting in a more flavorful and succulent dish Chicken marinated in a blend of spices, herbs, and acidic ingredients is soaked to absorb deep flavor and become more tender. The marinade typically includes elements like lemon juice or vinegar (for tenderizing), oil or yogurt (to keep the meat juicy), and seasonings such as garlic, pepper, or herbs. This process allows the chicken to develop a rich, well-balanced taste before it’s cooked—whether grilled, baked, or fried—resulting in a more flavorful and succulent dish"),
+                    child: ExpandableTextWidget(text:product.description!,),
                   ),
                 ],
               ),
@@ -77,7 +81,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                 AppIcon(
                   iconSize:Dimensions.getHeight(24) ,
                   iconColor:Colors.white, backgroundColor:AppColors.mainColor ,icon:Icons.remove),
-                 BigText(text: "\$12.88 " +" X "+" 0 ", color: AppColors.mainBlackColor, size: Dimensions.getHeight(26),),
+                 BigText(text: "\$ ${product.price!}  X  0 ", color: AppColors.mainBlackColor, size: Dimensions.getHeight(26),),
                 AppIcon(
                   iconSize:Dimensions.getHeight(24) ,
                   iconColor:Colors.white, backgroundColor:AppColors.mainColor ,icon:Icons.add),
@@ -126,7 +130,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                 borderRadius: BorderRadius.circular(Dimensions.getHeight(20)),
                 color: AppColors.mainColor,
               ),
-              child: BigText(text: "\$10 | Add to cart", color: Colors.white),
+              child: BigText(text: "\$ ${product.price!} | Add to cart", color: Colors.white),
             ),
           ],
         ),

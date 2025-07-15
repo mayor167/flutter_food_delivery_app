@@ -1,4 +1,6 @@
+import 'package:app1/controllers/popular_product_controller.dart';
 import 'package:app1/pages/home/main_food_page.dart';
+import 'package:app1/utilis/app_constants.dart';
 import 'package:app1/utilis/colors.dart';
 import 'package:app1/utilis/dimensions.dart';
 import 'package:app1/widgets/app_column.dart';
@@ -11,10 +13,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PopularFoodDetail extends StatelessWidget {
-  const PopularFoodDetail({super.key});
-
+  int pageId;
+   PopularFoodDetail({super.key, required this.pageId});
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<PopularProductController>().popularProductLsit[pageId];
+  // print("page is id" + pageId.toString());
+  // print("Product name is" + product.name.toString());
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -29,7 +34,7 @@ class PopularFoodDetail extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage("assets/image/food0.png"),
+                  image: NetworkImage(AppConstants.BASE_URL + AppConstants.UPLOAD_URL + product.img! ),
                 ),
               ),
             ),
@@ -74,15 +79,14 @@ class PopularFoodDetail extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AppColumn(text: "Chinese Side"),
+                  AppColumn(text: product.name!),
                   SizedBox(height: Dimensions.getHeight(20)),
                   BigText(text: "Introduce"),
                   SizedBox(height: Dimensions.getHeight(20)),
                   Expanded(
                     child: SingleChildScrollView(
                       child: ExpandableTextWidget(
-                        text:
-                            "Chicken marinated in a blend of spices, herbs, and acidic ingredients is soaked to absorb deep flavor and become more tender. The marinade typically includes elements like lemon juice or vinegar (for tenderizing), oil or yogurt (to keep the meat juicy), and seasonings such as garlic, pepper, or herbs. This process allows the chicken to develop a rich, well-balanced taste before it’s cooked—whether grilled, baked, or fried—resulting in a more flavorful and succulent dish.",
+                        text:product.description!,
                       ),
                     ),
                   ),
@@ -142,7 +146,7 @@ class PopularFoodDetail extends StatelessWidget {
                 borderRadius: BorderRadius.circular(Dimensions.getHeight(20)),
                 color: AppColors.mainColor,
               ),
-              child: BigText(text: "\$10 | Add to cart", color: Colors.white),
+              child: BigText(text: "\$ ${product.price!} | Add to cart", color: Colors.white),
             ),
           ],
         ),
