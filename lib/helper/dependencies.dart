@@ -18,7 +18,7 @@ Future<void> init()async {
      Get.lazyPut(()=>RecommendedProductRepo(apiClient:Get.find()));
     Get.lazyPut(()=>CartRepo());
 //controllers
-Get.lazyPut(()=> PopularProductController(popularProductRepo:Get.find()));
-Get.lazyPut(()=> RecommendedProductController(recommendedProductRepo:Get.find()));
-Get.lazyPut(()=>CartController(cartRepo:Get.find()));
+Get.lazyPut(()=> PopularProductController(popularProductRepo:Get.find()), fenix: true);
+Get.lazyPut(()=> RecommendedProductController(recommendedProductRepo:Get.find()), fenix: true);
+Get.lazyPut(()=>CartController(cartRepo:Get.find()), fenix: true);
 }
