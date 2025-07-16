@@ -1,5 +1,6 @@
 import 'package:app1/controllers/cart_controller.dart';
 import 'package:app1/data/repository/popular_product_repo.dart';
+import 'package:app1/models/cart_model.dart';
 import 'package:app1/models/products_model.dart';
 import 'package:app1/utilis/colors.dart';
 import 'package:flutter/material.dart';
@@ -31,10 +32,11 @@ class PopularProductController extends GetxController {
 
   void setQuantity(bool isIncrement) {
     if (isIncrement) {
-      // print("Increment");
       _quantity = checkQuantity(_quantity + 1);
+       print("number of items " + _quantity.toString());
     } else {
       _quantity = checkQuantity(_quantity - 1);
+       print("decrement " + _quantity.toString());
     }
     update();
   }
@@ -47,6 +49,10 @@ class PopularProductController extends GetxController {
         backgroundColor: AppColors.mainColor,
         colorText: Colors.white,
       );
+      if(_inCartItems >0){
+          _quantity = -_inCartItems;
+          return _quantity;
+      }
       return 0;
     } else if ((_inCartItems + quantity) > 20) {
       Get.snackbar(
@@ -67,13 +73,12 @@ class PopularProductController extends GetxController {
     _cart = cart;
     var exist = false;
     exist = _cart.existInCart(product);
-    //if exist
-    //get from _inCartItem = 3
-    print("exist or not " + exist.toString());
+    
+    //print("exist or not " + exist.toString());
     if (exist) {
       _inCartItems = _cart.getQuantity(product);
     }
-    print("The quantity in the cart is " + _inCartItems.toString());
+    //print("The quantity in the cart is " + _inCartItems.toString());
   }
 
   void addItem(ProductModel product) {
@@ -94,5 +99,8 @@ class PopularProductController extends GetxController {
 
   int get totalItems {
     return _cart.totalItems;
+  }
+  List<CartModel> get getItems{
+    return _cart.getItems;
   }
 }

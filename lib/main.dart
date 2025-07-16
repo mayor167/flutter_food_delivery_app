@@ -1,5 +1,6 @@
 import 'package:app1/controllers/popular_product_controller.dart';
 import 'package:app1/controllers/recommended_product_controller.dart';
+import 'package:app1/pages/cart/cart_page.dart';
 import 'package:app1/pages/food/popular_food_detail.dart';
 import 'package:app1/pages/food/recommended_food_detail.dart';
 import 'package:app1/pages/home/food_page_body.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
       ),
       home: MainFoodPage(),
       initialRoute: RouteHelper.initial,
-      getPages: RouteHelper.routes,
+    getPages: RouteHelper.routes,
     );
   }
 }
