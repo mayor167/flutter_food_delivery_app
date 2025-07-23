@@ -14,7 +14,7 @@ this._products = products;
   Product.fromJson(Map<String, dynamic> json) {
     _totalSize = json['total_size'];
     _typeId = json['type_id'];
-    _offset = json['offset'];
+    _offset = json['offset']; 
     if (json['products'] != null) {
       _products = <ProductModel>[];
       json['products'].forEach((v) {
